@@ -37,9 +37,8 @@ class RealizarLogin implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         
-        $email = filter_input(
-            INPUT_POST,
-            "email",
+        $email = filter_var(
+            $request->getParsedBody()['email'],
             FILTER_VALIDATE_EMAIL
         );
 
@@ -51,11 +50,11 @@ class RealizarLogin implements RequestHandlerInterface
             ]);
         }
 
-        $senha = filter_input(
-            INPUT_POST,
-            "senha",
+        $senha = filter_var(
+            $request->getParsedBody()['senha'],
             FILTER_SANITIZE_STRING
         );
+        
 
         /** @var Usuario $usuario */
         $usuario = $this->usuarioRepositorio->findOneBy([

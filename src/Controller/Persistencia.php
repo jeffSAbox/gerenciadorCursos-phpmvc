@@ -26,17 +26,10 @@ class Persistencia implements RequestHandlerInterface
   {
 
     //  FILTRAR descricao
-    $descricao = filter_input(
-      INPUT_POST,
-      "descricao",
-      FILTER_SANITIZE_STRING
-    );
+    $descricao = $request->getParsedBody()['descricao'];
 
-    $id = filter_input(
-      INPUT_GET,
-      "id",
-      FILTER_VALIDATE_INT
-    );
+    $id = filter_var($request->getQueryParams()['id'], 
+    FILTER_VALIDATE_INT);
 
     $curso = new Curso();
     if( !is_null($id) and $id !== false ){

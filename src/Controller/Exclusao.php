@@ -24,7 +24,10 @@ class Exclusao implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $id = filter_var(
+            $request->getQueryParams()['id'],
+            FILTER_VALIDATE_INT
+        );
 
         if( is_null($id) or $id === false ){
 
