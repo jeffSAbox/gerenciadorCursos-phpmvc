@@ -5,6 +5,8 @@ namespace Alura\Cursos\Controller;
 use Alura\Cursos\Infra\EntityManagerCreator;
 use Alura\Cursos\Entity\Curso;
 use Alura\Cursos\Helper\RederizarHtml;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Entity;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,10 +19,9 @@ class ListarCursos implements RequestHandlerInterface
 
   private $repositorioDeCursos;
 
-  public function __construct()
+  public function __construct(EntityManagerInterface $entityManager)
   {
-    $entityManager = (new EntityManagerCreator())
-      ->getEntityManager();
+    
     $this->repositorioDeCursos = $entityManager
       ->getRepository(Curso::class);
 
