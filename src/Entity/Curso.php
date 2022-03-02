@@ -6,7 +6,7 @@ namespace Alura\Cursos\Entity;
  * @Entity
  * @Table(name="cursos")
  */
-class Curso
+class Curso implements \JsonSerializable
 {
     /**
      * @Id
@@ -53,5 +53,14 @@ class Curso
     public function setNota(int $nota): void
     {
         $this->nota = $nota;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'nome' => $this->getDescricao(),
+            'nota' => $this->getNota()
+        ];
     }
 }

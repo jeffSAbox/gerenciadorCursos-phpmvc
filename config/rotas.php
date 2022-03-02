@@ -26,6 +26,10 @@ return array(
     'class' => \Alura\Cursos\Controller\Deslogar::class,
     'autorizado' => true
   ],
+  "/listar-cursos-json"=>[
+    'class' => \Alura\Cursos\Controller\BuscarCursosJson::class,
+    'autorizado' => true
+  ],
 
   //  area login
   "/login"=>[
